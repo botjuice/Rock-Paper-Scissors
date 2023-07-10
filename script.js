@@ -40,4 +40,33 @@
 
 //    randomely generate a number between 0 and 2 to use as the computer choice
 function getComputerChoice() { return Math.floor((Math.random() * 3) ) }
-console.log(getComputerChoice());
+
+function getPlayerChoice() {
+    // create a prompt asking the players choice
+    let valid = false
+    while (valid === false) {
+        let playerChoice = prompt("choose your weapon: (Rock, Paper, or Scissors)").toLowerCase();
+        switch(playerChoice){
+            case "rock":
+                return 0;
+                valid = true;
+                break;
+            case "paper":
+                return 1;
+                valid = true;
+                break;
+            case "scissors":
+                return 2;
+                valid = true;
+                break;
+            default:
+                alert("Please choose a valid weapon")
+                valid = false;
+        }
+    }
+}
+
+getPlayerChoice();
+
+    // if input is invalid request player to try again
+    // return choice as an integer
