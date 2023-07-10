@@ -31,26 +31,31 @@
     if player = 2 and computer = 1 ==> player wins
     return the winner of the round
 
+    game:
+    while both comp and player have less than 5 points
+    play rounds untill one of them has 5
+    report the winner or loser at the end of the game
 */
 
-    
 
 
 
+let playerPoints = 0;
+let computerPoints = 0;
 
 //    randomely generate a number between 0 and 2 to use as the computer choice
-function getComputerChoice() { return Math.floor((Math.random() * 3) ) }
-let computerSelection = getComputerChoice();
+function getComputerChoice() { return Math.floor((Math.random() * 3)) }
+
 
 function getPlayerChoice() {
     // create a prompt asking the players choice
     let valid = false
     while (valid === false) {
         let playerChoice = prompt("choose your weapon: (Rock, Paper, or Scissors)").toLowerCase();
-        
-        
+
+
         // validate and return choice as integer
-        switch(playerChoice){
+        switch (playerChoice) {
             case "rock":
                 return 0;
                 valid = true;
@@ -70,45 +75,69 @@ function getPlayerChoice() {
         }
     }
 }
-let playerSelection = getPlayerChoice();
+
 
 // if player wins then returns 0, if comp wins then returns 1, draw returns 3
-function playRound(playerSelection,computerSelection) {
-    if (playerSelection === 0 & computerSelection === 1)
-    {
-        alert("You Lose!!");
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === 0 & computerSelection === 1) {
         return 1;
     }
-    else if (playerSelection === 0 & computerSelection === 2) 
-    {
-        alert("You Win!!"); 
+    else if (playerSelection === 0 & computerSelection === 2) {
         return 0;
     }
-    else if (playerSelection === 1 & computerSelection === 0) 
-    {
-        alert("You Win!!"); 
+    else if (playerSelection === 1 & computerSelection === 0) {
         return 0;
     }
-    else if (playerSelection === 1 & computerSelection === 2) 
-    {
-        alert("You Lose!"); 
+    else if (playerSelection === 1 & computerSelection === 2) {
         return 1;
     }
-    else if (playerSelection === 2 & computerSelection === 0)
-     {
-        alert("You Lose!"); 
+    else if (playerSelection === 2 & computerSelection === 0) {
         return 1;
     }
-    else if (playerSelection === 2 & computerSelection === 1) 
-    {
-        alert("You Win!!"); 
+    else if (playerSelection === 2 & computerSelection === 1) {
         return 0;
     }
-    else if (playerSelection === computerSelection)
-    {
-        alert("It's a draw!")
-        return 3; 
+    else if (playerSelection === computerSelection) {
+        return 3;
     }
 
 }
-playRound(playerSelection, computerSelection);
+
+// game:
+// while both comp and player have less than 5 points
+// play rounds until one of them has 5
+// report the winner or loser at the end of the game
+
+function game() {
+    while (playerPoints < 5 & computerPoints < 5) {
+        //alert(`🧔🏻‍♂️: ${playerPoints} 🤖: ${computerPoints}`)
+        let winner;
+        let computerSelection = getComputerChoice();
+        let playerSelection = getPlayerChoice();
+        winner = playRound(playerSelection, computerSelection);
+
+        switch (winner) {
+            case 0:
+                playerPoints = playerPoints + 1;
+                alert("You Win!!" + `        🧔🏻‍♂️: ${playerPoints} 🤖: ${computerPoints}`);
+                break;
+            case 1:
+                computerPoints = computerPoints + 1;
+                alert("You Lose!!" + `        🧔🏻‍♂️: ${playerPoints} 🤖: ${computerPoints}`);
+                break;
+            case 3:
+                alert("It's a draw!" + `        🧔🏻‍♂️: ${playerPoints} 🤖: ${computerPoints}`)
+                break;
+            default:
+                alert("some error occured");
+        }
+    }
+    if (playerPoints === 5) {
+        alert("congratulations, YOU are the WINNER!!! 👏🎉" + `   🧔🏻‍♂️: ${playerPoints} 🤖: ${computerPoints}`);
+    }
+    else {
+        alert("BOOOHOOO you lose!! 😒😒😒" + `   🧔🏻‍♂️: ${playerPoints} 🤖: ${computerPoints}`)
+    }
+}
+
+game();
