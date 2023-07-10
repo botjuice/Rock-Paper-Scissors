@@ -40,12 +40,16 @@
 
 //    randomely generate a number between 0 and 2 to use as the computer choice
 function getComputerChoice() { return Math.floor((Math.random() * 3) ) }
+let computerSelection = getComputerChoice();
 
 function getPlayerChoice() {
     // create a prompt asking the players choice
     let valid = false
     while (valid === false) {
         let playerChoice = prompt("choose your weapon: (Rock, Paper, or Scissors)").toLowerCase();
+        
+        
+        // validate and return choice as integer
         switch(playerChoice){
             case "rock":
                 return 0;
@@ -60,13 +64,51 @@ function getPlayerChoice() {
                 valid = true;
                 break;
             default:
+                // if input is invalid request player to try again
                 alert("Please choose a valid weapon")
                 valid = false;
         }
     }
 }
+let playerSelection = getPlayerChoice();
 
-getPlayerChoice();
+// if player wins then returns 0, if comp wins then returns 1, draw returns 3
+function playRound(playerSelection,computerSelection) {
+    if (playerSelection === 0 & computerSelection === 1)
+    {
+        alert("You Lose!!");
+        return 1;
+    }
+    else if (playerSelection === 0 & computerSelection === 2) 
+    {
+        alert("You Win!!"); 
+        return 0;
+    }
+    else if (playerSelection === 1 & computerSelection === 0) 
+    {
+        alert("You Win!!"); 
+        return 0;
+    }
+    else if (playerSelection === 1 & computerSelection === 2) 
+    {
+        alert("You Lose!"); 
+        return 1;
+    }
+    else if (playerSelection === 2 & computerSelection === 0)
+     {
+        alert("You Lose!"); 
+        return 1;
+    }
+    else if (playerSelection === 2 & computerSelection === 1) 
+    {
+        alert("You Win!!"); 
+        return 0;
+    }
+    else if (playerSelection === computerSelection)
+    {
+        alert("It's a draw!")
+        return 3; 
+    }
 
-    // if input is invalid request player to try again
-    // return choice as an integer
+}
+playRound(playerSelection, computerSelection);
